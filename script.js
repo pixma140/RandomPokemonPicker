@@ -7,6 +7,7 @@ var lastList;
 var haslocalstorage;
 var lastPokemon;
 var linkLocation = 'https://www.bisafans.de/pokedex/001.php';
+var NUMBER_OF_POKEMON = 150;
 
 if (typeof(Storage) !== "undefined") {			
 	haslocalstorage = true;
@@ -16,7 +17,7 @@ if (typeof(Storage) !== "undefined") {
 						
 		var myToTakeList = new Array();
 		
-		for(var i = 0; i < 150; i++) {
+		for(var i = 0; i < NUMBER_OF_POKEMON; i++) {
 			myToTakeList.push(i + 1);									
 		}								
 		
@@ -30,7 +31,13 @@ if (typeof(Storage) !== "undefined") {
 		//alert("Liste erfolgreich geladen!");
 	}
 	
-	randomMon = Math.floor(Math.random() * myList.length);
+	var randomNbr = Math.floor(Math.random() * (myList.length));
+	var randomMon = myList[randomNbr];
+	
+	/*	
+	if (typeof randomMon == "undefined") {
+		noPokemonAnymore();
+	} */
 	
 	if(localStorage.getItem(myKeyLastList) === null) {
 						
@@ -110,8 +117,16 @@ function nextPokemonButton() {
 	myList = JSON.parse(localStorage.getItem(myKeyList));	
 	lastList = JSON.parse(localStorage.getItem(myKeyLastList));
 	
-	var randomNbr = Math.floor(Math.random() * (myList.length));	
-	var randomMon = myList[randomNbr];
+	var randomNbr;
+	var randomMon;
+		
+	randomNbr = Math.floor(Math.random() * (myList.length));
+	randomMon = myList[randomNbr];
+	
+	/*
+	if (typeof randomMon == "undefined") {
+		noPokemonAnymore();
+	} */	
 	
 	var newList = new Array();
 	for (var i = 0; i < myList.length; i++) {
@@ -180,4 +195,13 @@ function buttonCancelPressed() {
 		
 		location.reload();
 	}	
+}
+
+function noPokemonAnymore() {
+	
+	localStorage.clear();
+
+	alert("There are no Pokemon to take anymore. Reset now.");
+	
+	location.reload();	
 }
