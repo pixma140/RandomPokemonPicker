@@ -10,7 +10,8 @@ var linkLocation = 'https://www.bisafans.de/pokedex/001.php';
 
 if (typeof(Storage) !== "undefined") {			
 	haslocalstorage = true;
-						
+		
+	var randomMon; 
 	if(localStorage.getItem(myKeyList) === null) {
 						
 		var myToTakeList = new Array();
@@ -25,15 +26,15 @@ if (typeof(Storage) !== "undefined") {
 		
 	} else {
 		
-		var myList = JSON.parse(localStorage.getItem(myKeyList));				
+		myList = JSON.parse(localStorage.getItem(myKeyList));				
 		//alert("Liste erfolgreich geladen!");
 	}
 	
-	var randomMon = Math.floor(Math.random() * 150);
+	randomMon = Math.floor(Math.random() * myList.length);
 	
 	if(localStorage.getItem(myKeyLastList) === null) {
 						
-		var lastList = new Array();
+		lastList = new Array();
 		lastList.push(randomMon);
 		
 		localStorage.setItem(myKeyLastList, JSON.stringify(lastList));
@@ -41,7 +42,7 @@ if (typeof(Storage) !== "undefined") {
 		
 	} else {
 		
-		var lastList = JSON.parse(localStorage.getItem(myKeyLastList));				
+		lastList = JSON.parse(localStorage.getItem(myKeyLastList));				
 		//alert("Letzte Pokemon Liste erfolgreich geladen!");
 	}
 
@@ -56,7 +57,15 @@ if (typeof(Storage) !== "undefined") {
 			lastString = "00" + lastPokemon;
 		} else if (lastPokemon < 100) {
 			lastString = "0" + lastPokemon;
-		}							
+		}
+
+		var newList = new Array();
+		for (var i = 0; i < myList.length; i++) {
+			if (myList[i] != randomMon) {
+				newList.push(myList[i]);
+			}
+		}
+		localStorage.setItem(myKeyList, JSON.stringify(newList));
 				
 		linkLocation = "https://www.bisafans.de/pokedex/" + lastString + ".php";
 		document.getElementById("myPokemonImage").src="https://media.bisafans.de/ba6dd92/thumbs/300x300/pokemon/artwork/" + lastString + ".png";			
@@ -74,6 +83,14 @@ if (typeof(Storage) !== "undefined") {
 			lastString = "0" + lastPokemon;
 		}
 		
+		var newList = new Array();
+		for (var i = 0; i < myList.length; i++) {
+			if (myList[i] != randomMon) {
+				newList.push(myList[i]);
+			}
+		}
+		localStorage.setItem(myKeyList, JSON.stringify(newList));
+		
 		linkLocation = "https://www.bisafans.de/pokedex/" + lastString + ".php";
 		document.getElementById("myPokemonImage").src="https://media.bisafans.de/ba6dd92/thumbs/300x300/pokemon/artwork/" + lastString + ".png";			
 		
@@ -90,11 +107,11 @@ if (typeof(Storage) !== "undefined") {
 function nextPokemonButton() {
 	//alert("Under construction!");
 	
-	myList = JSON.parse(localStorage.getItem(myKeyList));
-	
-	var randomMon = Math.floor(Math.random() * (myList.length));
-	
+	myList = JSON.parse(localStorage.getItem(myKeyList));	
 	lastList = JSON.parse(localStorage.getItem(myKeyLastList));
+	
+	var randomNbr = Math.floor(Math.random() * (myList.length));	
+	var randomMon = myList[randomNbr];
 	
 	var newList = new Array();
 	for (var i = 0; i < myList.length; i++) {
@@ -102,7 +119,7 @@ function nextPokemonButton() {
 			newList.push(myList[i]);
 		}
 	}
-				
+	
 	lastList.push(randomMon);
 	
 	var lastString = randomMon;
