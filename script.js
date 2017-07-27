@@ -128,17 +128,30 @@ function nextPokemonButton() {
 	
 }
 
-function contains(a, obj) {
-	for (var i = 0; i < a.length; i++) {
-		if (a[i] === obj) {
-			return true;
-		}
-	}
-	return false;
+function nextInfo() {
+	window.open(linkLocation,'_blank');
+	
+	//var myLink = "http://httpbin.org/ip";
+	//var myLink = "https://pokemongo.gamepress.gg/de/pokemon/232";	
+	
+	//httpGetAsync(myLink);
 }
 
-function nextInfo() {
-	window.open(linkLocation,'_blank')
+// async get request
+function httpGetAsync(theUrl) {
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function() { 
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+			callback(xmlHttp.responseText);            
+		}
+    }
+    xmlHttp.open("GET", theUrl, true); // true for asynchronous 
+    xmlHttp.send(null);
+}
+
+// callback
+function callback(myText) {	
+	alert(myText);
 }
 
 function buttonCancelPressed() {
@@ -150,4 +163,4 @@ function buttonCancelPressed() {
 		
 		location.reload();
 	}	
-}	
+}
