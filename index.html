@@ -23,6 +23,7 @@
 		
 		<!-- add favicon -->
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+			
 	</head>
 	
 	<body style="background-color:GREEN;">		
@@ -30,14 +31,13 @@
 		<div class="container-fluid">
 			
 			<center>
-			
-			<!-- DE -->
-			<h1><b>Random Pokemon Picker</b></h1>
+						
+			<h1><b>Random Pokémon Picker</b></h1>
 			<p>This tool picks a random Pokémon</p>	
 					
-			<div class="form-group"> <!-- has-feedback has-clear -->
+			<div class="form-group">
 								
-				<img id="myPokemonImage" src="" alt="pokemon image" width="auto" height="auto"> <br><br>					
+				<img id="myPokemonImage" class="img-responsive" src="" alt="pokemon image" width="auto" height="auto"> <br><br>					
 	
 				<label for="lastPokemon">Last Pokemon:</label>
 				<input type="text" class="form-control" id="lastPokemon" name="lastPokemonLabel" value="hi" style="text-align:right"> <br><br>
@@ -45,16 +45,18 @@
 				<label for="todoPokemon">Todo Pokemon:</label>
 				<input type="text" class="form-control" id="todoPokemon" name="todoPokemonLabel" value="hi" style="text-align:right"> <br><br>				
 				
-				<button type="button" class="btn" onclick="buttonCancelPressed()" >Reset</button> <br><br>			
+				<button type="button" class="btn" onclick="buttonCancelPressed()">Reset</button> <br><br>							
 				
-				<button type="button" class="btn" onclick="nextPokemonButton()" >Next Pokemon to draw!</button> <br><br>				
+				<button type="button" class="btn" onclick="nextInfo()">Get information about the Pokémon!</button> <br><br>							
+				
+				<button type="button" class="btn" onclick="nextPokemonButton()">Next Pokemon to draw!</button> <br><br>
 				
 			</div>	
 			
 			</center>
 			
 		</div>
-	</body>
+	</body>	
 	
 	<!-- get my own script -->
 	<script src="script.js"></script>

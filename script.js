@@ -6,6 +6,7 @@ var myList;
 var lastList;
 var haslocalstorage;
 var lastPokemon;
+var linkLocation = 'https://www.bisafans.de/pokedex/001.php';
 
 if (typeof(Storage) !== "undefined") {			
 	haslocalstorage = true;
@@ -56,7 +57,8 @@ if (typeof(Storage) !== "undefined") {
 		} else if (lastPokemon < 100) {
 			lastString = "0" + lastPokemon;
 		}							
-		
+				
+		linkLocation = "https://www.bisafans.de/pokedex/" + lastString + ".php";
 		document.getElementById("myPokemonImage").src="https://media.bisafans.de/ba6dd92/thumbs/300x300/pokemon/artwork/" + lastString + ".png";			
 		
 		//alert("Letztes Pokemon reseted!");				
@@ -72,6 +74,7 @@ if (typeof(Storage) !== "undefined") {
 			lastString = "0" + lastPokemon;
 		}
 		
+		linkLocation = "https://www.bisafans.de/pokedex/" + lastString + ".php";
 		document.getElementById("myPokemonImage").src="https://media.bisafans.de/ba6dd92/thumbs/300x300/pokemon/artwork/" + lastString + ".png";			
 		
 		//alert("Letztes Pokemon erfolgreich geladen!");
@@ -110,6 +113,7 @@ function nextPokemonButton() {
 			lastString = "0" + randomMon;
 	}
 	
+	linkLocation = "https://www.bisafans.de/pokedex/" + lastString + ".php";
 	document.getElementById("myPokemonImage").src="https://media.bisafans.de/ba6dd92/thumbs/300x300/pokemon/artwork/" + lastString + ".png";
 	document.getElementById("lastPokemon").value=lastList;			
 	document.getElementById("todoPokemon").value=randomMon;			
@@ -131,6 +135,10 @@ function contains(a, obj) {
 		}
 	}
 	return false;
+}
+
+function nextInfo() {
+	window.open(linkLocation,'_blank')
 }
 
 function buttonCancelPressed() {
